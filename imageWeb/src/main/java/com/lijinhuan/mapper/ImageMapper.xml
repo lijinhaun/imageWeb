@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lijinhuan.mapper.ImageMapper">
+<resultMap id="userMap" type="com.lijinhuan.model.Image">
+  <id property="userId" column="userId" />
+  <result property="imageName" column="imageName"/>
+</resultMap>	
+	
+ <!--
+ <select id="queryUser" parameterType="com.lijinhuan.model.User" resultMap="userMap">
+ 	select * from user where username=#{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+ </select>
+ -->
+ <insert id="insert" parameterType="com.lijinhuan.model.Image">
+ 	insert into image(userId,imageName) values (#{userId,jdbcType=INTEGER},#{imageName,jdbcType=VARCHAR})
+ </insert>
+</mapper>
