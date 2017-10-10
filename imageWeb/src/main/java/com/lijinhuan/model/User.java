@@ -1,6 +1,6 @@
 package com.lijinhuan.model;
 
-public class User {
+public class User extends Input{
 
 	private String username;
 	private String password;

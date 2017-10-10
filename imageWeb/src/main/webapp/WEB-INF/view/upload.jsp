@@ -8,33 +8,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Cyrus Studio</title>
 
-<!-- Google fonts -->
 <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
-
-<!-- font awesome -->
-<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
-<!-- bootstrap -->
-<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
-
-<!-- animate.css -->
-<link rel="stylesheet" href="assets/animate/animate.css" />
-<link rel="stylesheet" href="assets/animate/set.css" />
-
-<!-- gallery -->
-<link rel="stylesheet" href="assets/gallery/blueimp-gallery.min.css">
-
-<!-- favicon -->
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-
-
 <link rel="stylesheet" href="assets/style.css">
-<style>
-	.btn{
-		font-size: 18px;
-	}
-</style>
+<link rel="stylesheet" href="assets/animate/animate.css" />
+<link rel="stylesheet" href="assets/animate/set.css" />
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="assets/fileinput.css">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/gallery/blueimp-gallery.min.css">
+
 </head>
 
 <body>
@@ -60,13 +44,6 @@
             <div class="navbar-collapse  collapse">
               <ul class="nav navbar-nav navbar-right scroll">
                  <li ><a href="#contact"></a></li>
-                 <!-- 
-                 <li class="active"><a href="#works">Home</a></li>
-                  -->
-                 <!-- 
-                 <li ><a href="#about">About</a></li>
-                 <li ><a href="#partners">Partners</a></li>
-                  -->
               </ul>
             </div>
             <!-- #Nav Ends -->
@@ -82,12 +59,16 @@
 <div class="container contactform center">
 <h2 class="text-center  wowload fadeInUp"></h2>
   <div class="row wowload fadeInLeftBig"> 
-  	<form action="login.html">
-  		<div class="col-sm-6 col-sm-offset-3 col-xs-12">      
-	        <input type="file" name="imageFile" placeholder="选择上传的图片">
-	        <button type="submit" class="btn btn-primary" id="submit"><i class="fa fa-paper-plane"></i> 上传</button>
-      	</div>
-  	</form>
+  	<form enctype="multipart/form-data" action="doUpload.html" method="get">
+        <div class="form-group">
+            <div class="file-loading">
+                <input type="file"  name="uploadfile" id="uploadfile" multiple  class="file-loading" >
+            </div>
+        </div>
+    </form>
+    <form meth="post" action="index.html" method="post">
+    	<input type="hidden" name="token" value=${token} ></input>
+    </form>
   </div>
 </div>
 </div>
@@ -107,7 +88,9 @@ Copyright 2014 Cyrus Creative Studio. All rights reserved.More Templates <a href
 
 <!-- jquery -->
 <script src="assets/jquery.js"></script>
-
+<!-- fileInput -->
+<script src="assets/fileinput.js"></script>
+	<script src="assets/zh.js"></script>
 <!-- wow script -->
 <script src="assets/wow/wow.min.js"></script>
 
@@ -124,5 +107,50 @@ Copyright 2014 Cyrus Creative Studio. All rights reserved.More Templates <a href
 
 <!-- custom script -->
 <script src="assets/script.js"></script>
+
+<script type="text/javascript">
+
+$(function () {
+    //0.初始化fileinput
+    $('#uploadfile').on('fileuploaded', function(event, file, previewId, index, reader) {
+	        console.log("fileloaded");
+	    });
+    var oFileInput = new FileInput();
+    oFileInput.Init("uploadfile", "doUpload.html");
+});
+
+var FileInput = function () {
+	var oFile = new Object();
+
+    //初始化fileinput控件（第一次初始化）
+    oFile.Init = function(ctrlName, uploadUrl) {
+	    var control = $('#' + ctrlName);
+	
+	    //初始化上传控件的样式
+	    control.fileinput({
+	        language: 'zh', //设置语言
+	        uploadUrl: uploadUrl, //上传的地址
+	        uploadAsync: true, //默认异步上传
+	        allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+	        showUpload: true, //是否显示上传按钮
+	        showCaption: false,//是否显示标题
+	        browseClass: "btn btn-primary", //按钮样式     
+	        maxFileCount: 20, //表示允许同时上传的最大文件个数
+	        enctype: 'multipart/form-data',
+	        validateInitialCount:true,
+	        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+	        msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+	    }).on('filepreupload', function(event, data, previewId, index) {
+	        if(!data.response){
+	        	alter("上传失败");
+	        }else{
+	        	window.location.href="http://localhost:8080/imageWeb/home.html?token=123456";
+	        }
+	    	console.log('File pre upload triggered');
+		});
+	}
+    return oFile;
+}
+</script>
 </body>
 </html>

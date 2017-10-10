@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,10 +79,25 @@
     </div>
 <!-- #Header Starts -->
 <form id="pageForm" action="upload.html">
-	<input type="text" hidden="true" name="token" value="123456">
+	<input type="text" hidden="true" name="token" value=${token}>
 </form>
 <!-- works -->
 <div id="works"  class=" clearfix grid"> 
+	<c:if test="${tradeList==null || fn:length(tradeList) == 0}">
+		未上传图片
+	</c:if> 
+	<c:forEach items="${images}" var="item" varStatus="status">  
+		<figure class="effect-oscar  wowload fadeIn">
+        <img src="C:/Users/jinhuan/Pictures/echarts折线效果图/${item.imageName}.jpg" alt="img01"/>
+        <figcaption>
+            <h2>Nature</h2>
+            <p>Lily likes to play with crayons and pencils<br>
+            <a href="images/portfolio/1.jpg" title="1" data-gallery>View more</a></p>            
+        </figcaption>
+    </figure>
+	</c:forEach>
+	<!-- 
+	
     <figure class="effect-oscar  wowload fadeIn">
         <img src="images/portfolio/1.jpg" alt="img01"/>
         <figcaption>
@@ -179,7 +195,7 @@
             <a href="images/portfolio/12.jpg" title="1" data-gallery>View more</a></p>            
         </figcaption>
     </figure>
-    
+     -->
 
      
 </div>
@@ -216,7 +232,7 @@
 <!-- Footer Starts -->
 <div class="footer text-center spacer">
 <p class="wowload flipInX"><a href="#"><i class="fa fa-facebook fa-2x"></i></a> <a href="#"><i class="fa fa-instagram fa-2x"></i></a> <a href="#"><i class="fa fa-twitter fa-2x"></i></a> <a href="#"><i class="fa fa-flickr fa-2x"></i></a> </p>
-Copyright 2014 Cyrus Creative Studio. All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+Copyright 2014 Cyrus Creative Studio. All rights reserved.More Templates <a href="http://www.bai.com/" target="_blank" title="个人相册">个人相册</a> - Collect from <a href="http://www.baidu.com/" title="个人相册" target="_blank">个人相册</a>
 </div>
 <!-- # Footer Ends -->
 <a href="#works" class="gototop "><i class="fa fa-angle-up  fa-3x"></i></a>

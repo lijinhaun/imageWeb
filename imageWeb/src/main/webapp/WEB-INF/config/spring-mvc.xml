@@ -10,7 +10,11 @@
 	<mvc:annotation-driven></mvc:annotation-driven>	
 	<mvc:default-servlet-handler/>
 	<context:component-scan base-package="com.lijinhuan.controller"></context:component-scan>
-	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8"/>
+		<property name="maxInMemorySize" value="10240"></property><!-- 最大内存大小 -->
+		<property name="maxUploadSize" value="-1"></property><!-- -1代表没有限制 -->
+	</bean>
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/view/"></property>
 		<property name="suffix" value=".jsp"></property>
