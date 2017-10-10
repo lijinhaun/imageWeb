@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,16 +85,16 @@
 </form>
 <!-- works -->
 <div id="works"  class=" clearfix grid"> 
-	<c:if test="${tradeList==null || fn:length(tradeList) == 0}">
+	<c:if test="${images==null || fn:length(images) == 0}">
 		未上传图片
 	</c:if> 
 	<c:forEach items="${images}" var="item" varStatus="status">  
 		<figure class="effect-oscar  wowload fadeIn">
-        <img src="C:/Users/jinhuan/Pictures/echarts折线效果图/${item.imageName}.jpg" alt="img01"/>
+        <img src="images/portfolio/${item.imageName}.jpg" alt="img01"/>
         <figcaption>
             <h2>Nature</h2>
             <p>Lily likes to play with crayons and pencils<br>
-            <a href="images/portfolio/1.jpg" title="1" data-gallery>View more</a></p>            
+            <a href="images/portfolio/${item.imageName}.jpg" title="1" data-gallery>View more</a></p>            
         </figcaption>
     </figure>
 	</c:forEach>

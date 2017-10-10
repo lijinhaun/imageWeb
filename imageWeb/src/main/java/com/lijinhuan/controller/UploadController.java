@@ -40,7 +40,7 @@ public class UploadController {
 		InputStream inputStream = null;
 		try {
 			inputStream = file.getInputStream();
-			File file2 = new File("D:/text/"+file.getOriginalFilename());
+			File file2 = new File("E:\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\imageWeb\\images\\portfolio\\"+fileName+".jpg");
 			outputStream = new FileOutputStream(file2);
 			byte[] bytes = new byte[1024];
 			int len = 0;

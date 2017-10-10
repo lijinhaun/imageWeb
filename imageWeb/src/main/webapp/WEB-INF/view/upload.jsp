@@ -144,7 +144,7 @@ var FileInput = function () {
 	        if(!data.response){
 	        	alter("上传失败");
 	        }else{
-	        	window.location.href="http://localhost:8080/imageWeb/home.html?token=123456";
+	        	window.location.href="http://localhost/imageWeb/home.html?token=123456";
 	        }
 	    	console.log('File pre upload triggered');
 		});

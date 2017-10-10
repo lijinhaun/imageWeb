@@ -2,10 +2,19 @@ package com.lijinhuan.model;
 
 public class User extends Input{
 
+	private int id;
 	private String username;
 	private String password;
 	private String mobile;
 	private String mail;
+	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getUsername() {
 		return username;
 	}
